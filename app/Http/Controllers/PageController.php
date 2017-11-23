@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Post;
@@ -62,13 +63,23 @@ class PageController extends Controller
             'is_featured' => 1,
         ])->get();
 
+        $authorFeature = Post::where([
+            ['category_id', 12],
+            ['status', 1]
+        ])
+            ->with('tagged', 'category')
+            ->latest()
+            ->first();
 
+        $authors = Author::orderBy('created_at','desc')->get();
         return view('visitor.index')->with([
                 'articles' => $articles,
                 'videos' => $videos,
                 'audios' => $audios,
                 'sliders' => $sliders,
-                'partners' => $partners
+                'partners' => $partners,
+                'authors' => $authors,
+                'authorFeature' => $authorFeature,
             ]);
     }
 
@@ -612,6 +623,11 @@ class PageController extends Controller
         }else{
             return view('errors.404')->with('exception', 'Cannot search tag name empty, please try again!');
         }
+    }
+    public function authorDetail($id){
+        $author = Author::findOrFail($id);
+        $authors = Author::where('id','<>',$id)->get();
+        return view('visitor.authorDetail',compact('author','authors'));
     }
 
 }

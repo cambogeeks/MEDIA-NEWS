@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -214,6 +215,60 @@ class AdminAjaxController extends Controller
                     "success" => [
                         "code" => 200,
                         "message" => "Successfully deleted partner with ID : ".$partnerId
+                    ]
+                ]);
+            }
+
+            // Request must specify post id
+            return response()->json([
+                "status" => 202,
+                "error" => [
+                    "code" => 202,
+                    "message" => "Invalid request data"
+                ]
+            ]);
+        }
+
+        // Return if rquest not an AJAX
+        return redirect()->back();
+    }
+    public function removeAuthor(Request $request){
+        if($request->ajax()){
+
+            // Determine if post exist
+            if($request->has('id')){
+                $partnerId = $request->input('id');
+                try{
+                    $partner = Author::findOrFail($partnerId);
+                }catch(ModelNotFoundException $e){
+                    return response()->json([
+                        "status" => 202,
+                        "error" => [
+                            "code" => 202,
+                            "message" => "No Query result found for Author ID : ".$partnerId
+                        ]
+                    ]);
+                }
+
+                // Try to delete post
+                try{
+                    $partner->delete();
+                }catch(Exception $e){
+                    return response()->json([
+                        "status" => 505,
+                        "error" => [
+                            "code" => 505,
+                            "message" => "Error while trying to delete Author"
+                        ]
+                    ]);
+                }
+
+                // Response with successful message
+                return response()->json([
+                    "status" => 200,
+                    "success" => [
+                        "code" => 200,
+                        "message" => "Successfully deleted Author with ID : ".$partnerId
                     ]
                 ]);
             }

@@ -6,7 +6,7 @@
             <div class="header-wrapper">
                 <div class="site_logo">
                     <a href="{{ url('/') }}" class="uk-display-block">
-                        <img src="{{ asset('images/logo/site_logo_large.png') }}" alt="180 INSPIRE site logo">
+                        <img src="{{ asset('images/logo/site_logo.png') }}" alt="180 INSPIRE site logo">
                     </a>
                 </div>
 
@@ -18,12 +18,6 @@
                                     <a data-toggle=".reading_menu" href="#" class="toggle_menu custom-a__link font-en-opensans active">
                                         <i class="fa fa-newspaper-o"></i>
                                         <span>Reading</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle=".listen_menu" href="#" class="toggle_menu custom-a__link font-en-opensans">
-                                        <i class="fa fa-music"></i>
-                                        <span>Listen</span>
                                     </a>
                                 </li>
                                 <li>
@@ -104,12 +98,6 @@
                                     <a data-toggle=".reading_menu" href="#" class="toggle_menu custom-a__link font-en-opensans">
                                         <i class="fa fa-newspaper-o"></i>
                                         <span>Reading</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle=".listen_menu" href="#" class="toggle_menu custom-a__link font-en-opensans">
-                                        <i class="fa fa-music"></i>
-                                        <span>Listen</span>
                                     </a>
                                 </li>
                                 <li>

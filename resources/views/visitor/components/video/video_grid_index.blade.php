@@ -18,7 +18,9 @@
 
                 <div class="post-grid__meta">
                     <span class="post-grid__category font-kh-hanuman">
-                        {{ $video->category->name }}
+                        @if($video->category)
+                            {{ $video->category->name }}
+                        @endif
                     </span>
                     <span class="post-grid__datetime">
                         {{ $video->created_at->diffForHumans() }}

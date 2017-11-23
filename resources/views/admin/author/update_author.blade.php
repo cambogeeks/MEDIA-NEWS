@@ -25,35 +25,35 @@
             @endcomponent
         @endif
         @if(Session::has('error_message'))
-        <script type="text/javascript">
-            swal({
-                title: "Opp! Something went wrong",
-                text: "{{ Session::get('error_message') }}",
-                type: "error",
-                timer: 5000,
-                allowOutsideClick: true
-            });
-        </script>
+            <script type="text/javascript">
+                swal({
+                    title: "Opp! Something went wrong",
+                    text: "{{ Session::get('error_message') }}",
+                    type: "error",
+                    timer: 5000,
+                    allowOutsideClick: true
+                });
+            </script>
         @endif
         @if($errors->any())
-        <script type="text/javascript">
-            swal({
-                title: "Opp! Something went wrong",
-                text: "@foreach($errors->all() as $error) <p>{{ $error }}</p> @endforeach",
-                type: "error",
-                timer: 5000,
-                html: true,
-                allowOutsideClick: true
-            });
-        </script>
+            <script type="text/javascript">
+                swal({
+                    title: "Opp! Something went wrong",
+                    text: "@foreach($errors->all() as $error) <p>{{ $error }}</p> @endforeach",
+                    type: "error",
+                    timer: 5000,
+                    html: true,
+                    allowOutsideClick: true
+                });
+            </script>
         @endif
-        <form class="custom-form" enctype="multipart/form-data" action="{{ route('admin.admin.store') }}" method="POST">
+        <form class="custom-form" enctype="multipart/form-data" action="{{ route('admin.author.update') }}" method="POST">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <div class="uk-flex">
                 <!-- Card Form -->
                 <div class="uk-flex-1">
                     <h2 class="form-title uk-text-center">
-                        AUTHOR REGISTRATION FORM
+                        AUTHOR EDIT FORM
                         <span>
 
                         </span>
@@ -67,69 +67,70 @@
 
                                     <div class="custom-form-group">
                                         <div class="">
-                                            <input type="text" placeholder="Firstname" name="firstname" class="custom-input-text" required/>
+                                            <input type="hidden" value="{{$author->id}}" name="id" required/>
+                                            <input type="text" placeholder="Full Name" name="username" class="custom-input-text" value="{{$author->username}}" required/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
                                         <div class="">
-                                            <input type="text" placeholder="Lastname" name="lastname" class="custom-input-text" required/>
+                                            <input type="text" placeholder="Email address" name="email" value="{{$author->email}}" class="custom-input-text" required/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
+                                        <div class="heading">
+                                            <h3>
+                                                Contact number
+                                            </h3>
+                                        </div>
                                         <div class="">
-                                            <input type="text" placeholder="Username" name="username" class="custom-input-text" required/>
+                                            <input type="text" placeholder="Contact Number, optional" value="{{$author->phone}}" name="phonenumber" class="custom-input-text"/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
+                                        <div class="heading">
+                                            <h3>
+                                                Career
+                                            </h3>
+                                        </div>
                                         <div class="">
-                                            <input type="text" placeholder="Email address" name="email" class="custom-input-text" required/>
+                                            <input type="text" placeholder="Career, optional" value="{{$author->career}}" name="career" class="custom-input-text"/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
+                                        <div class="heading">
+                                            <h3>
+                                                Address
+                                            </h3>
+                                        </div>
                                         <div class="">
-                                            <input type="text" placeholder="Password" name="password" class="custom-input-text" required/>
+                                            <input type="text" placeholder="Address, optional" value="{{$author->address}}" name="address" class="custom-input-text"/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="text" placeholder="Contact Number, optional" name="phonenumber" class="custom-input-text"/>
+                                        <div class="heading">
+                                            <h3>
+                                                Bio
+                                            </h3>
                                         </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
                                         <div class="">
-                                            <input type="text" placeholder="Career, optional" name="career" class="custom-input-text"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="text" placeholder="Address, optional" name="address" class="custom-input-text"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="text" placeholder="Address, optional" name="address" class="custom-input-text"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input class="custom-input-text" placeholder="Write some bio ..." name="bio" type="text" />
+                                            <textarea placeholder="Write some bio ..." class="custom-input-textarea" name="bio">{{$author->bio}}</textarea>
                                         </div>
                                     </div>
 
                                     <!-- Featured image field -->
                                     <div class="custom-form-group">
+                                        @if($author->picture)
+                                            <img src="{{$author->picture}}" width="180"/>
+                                        @endif
                                         <div class="file-input-wrapper">
-                                            <button class="custom-upload-btn image uploadFile" data-type="image" id="uploadImage"><i class="fa fa-upload"></i> Upload Profile</button>
+                                            <button class="custom-upload-btn image uploadFile" data-type="image" id="uploadImage"><i class="fa fa-upload"></i> Update Profile</button>
                                             <input type="hidden" name="profile_pic" id="txtFeaturedImage" />
+                                            <input type="hidden" name="oldPhoto"value="{{$author->picture}}" />
                                         </div>
                                         <div class="imagePreview">
                                             <p>Profile Preview</p>
@@ -137,10 +138,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="custom-form-group">
+                                    <div class="custom-form-group uk-text-center">
                                         <div class="padding-top-sm"></div>
-                                        <input type="reset" class="custom-btn-cancel" value="Cancel">
-                                        <input type="submit" class="custom-btn-submit" value="Create Now"/>
+                                        <!-- <input type="reset" class="custom-btn-cancel" value="Cancel"> -->
+                                        <input type="submit" class="custom-btn-submit uk-margin-auto" value="Update Now"/>
                                     </div>
 
                                 </div>
@@ -156,19 +157,21 @@
             </div>
         </form>
     </div>
+
+    @includeIf('admin.partials._uploadfile')
 @endsection
 
 @push('script_dependencies')
-    <script type="text/javascript" src="{{ asset('js/done-typing.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admins/js/script.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admins/js/crud.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/done-typing.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admins/js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admins/js/crud.js') }}"></script>
 @endpush
 
 @section('script')
     <script>
         function responsive_filemanager_callback(field_id){
             var uploadImageModal = UIkit.modal("#fileManagerModal")
-                imageUrl="";
+            imageUrl="";
             switch(field_id){
                 case 'txtFeaturedImage':
                     imageUrl = $('#'+field_id).val();
@@ -181,12 +184,12 @@
                 case 'sound_url':
                     var playing = false,
                         audioEle = $('#audioEle').bind('play', function () {
-                                    playing = true;
-                                }).bind('pause', function () {
-                                    playing = false;
-                                }).bind('ended', function () {
-                                    audio.pause();
-                                }).get(0);
+                            playing = true;
+                        }).bind('pause', function () {
+                            playing = false;
+                        }).bind('ended', function () {
+                            audio.pause();
+                        }).get(0);
                     var supportsAudio = !!document.createElement('audio').canPlayType;
                     if (supportsAudio){
                         $(audioEle).attr('src', $('#'+field_id).val());

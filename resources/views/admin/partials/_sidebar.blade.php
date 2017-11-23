@@ -148,7 +148,7 @@
                     <div class="dropdown-nav">
                         <ul class="">
                             <li class="uk-active">
-                                <a href="{{ route('admin.author.manage') }}">
+                                <a href="{{ route('admin.author') }}">
                                     <i class="fa fa-book"></i>
                                     Manage Author
                                 </a>

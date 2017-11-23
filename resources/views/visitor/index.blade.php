@@ -112,68 +112,79 @@
             </div>
         </div>
     </div>
-    <!-- /Latest video grid -->
 
-    <!-- Latest music -->
     <div class="section">
-        <div class="latest-song">
+        <div class="latest-video pt-3 pb-3" style="background-image: url('{{URL('images/bg-angkor.jpg')}}');color: white !important;background-position: center;background-size: cover;">
             <div class="uk-container uk-container-center">
+
                 <div class="section-heading bottom-line">
                     <h3 class="bg_grey font-kh-nokora">
-                        <i class="fa fa-music"></i>
-                        @lang('visitor.latest_song')
+                        <i class="fa fa-users"></i>
+                        @lang('visitor.meetAuthor')
                     </h3>
                 </div>
 
-                <div class="section-bg__dark">
-                    <div class="uk-panel uk-panel-body">
-                        <div class="uk-grid uk-grid-collapse uk-grid-width-1-1 uk-grid-width-small-1-1 uk-grid-width-medium-1-2 uk-grid-width-large-1-2 uk-grid-width-xlarge-1-2">
+                <div style="background-color: rgba(0,0,0,.5);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="row">
+                                    @if(count($authors))
+                                        <div class="owl-carousel owl-theme" style="padding:10px">
+                                            @if(count($authors)==1)
+                                                @foreach($authors as $author)
+                                                    <div class="item">
+                                                        <center>
+                                                            <div style="background-repeat: no-repeat;background-position:center;width:180px;height:180px;background-image: url('{{$author->picture}}')"></div>
+                                                            <h5 class="text-center"><a href="{{route('visitor.author.detail',$author->id)}}" style="color:white">{{$author->username}}</a></h5>
+                                                        </center>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                @for($i=0;$i<count($authors);$i++)
+                                                        <div class="item">
+                                                           <div class="row">
+                                                               <div class="col-12 mb-1 mt-1 text-center">
+                                                                   <center>
+                                                                       <div style="background-repeat: no-repeat;background-position:center;width:180px;height:180px;background-image: url('{{$authors[$i]->picture}}')"></div>
+                                                                       <h5><a href="{{route('visitor.author.detail',$authors[$i]->id)}}" style="color:white">{{$authors[$i]->username}}</a></h5>
+                                                                   </center>
 
-                            <div class="music-box__thumbnail" style="background-image: url('{{ asset('images/musics/song_player_album_featured_image.png') }}')">
-                                <div class="inner">
-
+                                                               </div>
+                                                               <div class="col-12 mb-1 mt-1 text-center">
+                                                                   <center>
+                                                                       <div style="background-repeat: no-repeat;background-position:center;width:180px;height:180px;background-image: url('{{$authors[$i++]->picture}}')"></div>
+                                                                       <h5><a href="{{route('visitor.author.detail',$authors[$i]->id)}}" style="color:white">{{$authors[$i++]->username}}</a></h5>
+                                                                   </center>
+                                                               </div>
+                                                           </div>
+                                                        </div>
+                                                        <?php $i--?>
+                                                @endfor
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-
-                            <div class="music-box__player">
-                                <div class="column">
-                                    <div class="music-box__player-wrap">
-                                        <div class="music-box__player-nowPlay">
-                                            <span class="left music-box__player-action">Paused...</span>
-                                            <span class="right music-box__player-title"></span>
-                                        </div>
-                                        <div class="music-box__player-audiowrap">
-                                            <div id="audio0">
-                                                <audio preload id="audioEle" controls="controls">Your browser does not support HTML5 Audio!</audio>
-                                            </div>
-                                            <div class="music-box__player-tracks">
-                                                <a class="audio-control-next-pre" id="music-box__player-btnPrev">&laquo;</a>
-                                                <a class="audio-control-next-pre" id="music-box__player-btnNext">&raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="music-box__playlist-wrap">
-                                            <ul id="music-box__playlist"></ul>
-                                        </div>
-                                    </div>
+                            <div class="col-lg-6 col-md-12 pb-3">
+                                <div style="text-align: justify">
+                                    @if($authorFeature->video_url)
+                                        <h2 style="margin-top: 7px;">{{$authorFeature->title}}</h2>
+                                        <p>{!! str_limit($authorFeature->content, 150, '...') !!}</p>
+                                        <iframe width="100%" height="305px" src="https://www.youtube.com/embed/{{ $authorFeature->video_url }}" frameborder="0" allowfullscreen></iframe>
+                                    @endif
                                 </div>
+
                             </div>
-
                         </div>
                     </div>
-                </div>
 
-                <div class="section-bg__white">
-                    <div class="sponsor-slideset__footer">
-                        <div class="inner">
-                            <a href="{{ route('visitor.audio.page') }}">LISTEN MORE</a>
-                        </div>
-                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-    <!-- /Latest music -->
+    <!-- /Latest video grid -->
 
     @if(count($partners) > 0)
     <!-- Sponsor slideset -->
@@ -238,6 +249,24 @@
         ];
     </script>
     <script src="{{ asset('js/sound-player.js') }}"></script>
+<script src="{{asset('css/owlcarousel/owl.carousel.min.js')}}"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:15,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:3
+            }
+        }
+    })
+</script>
 @endpush
 
 @section('scripts')

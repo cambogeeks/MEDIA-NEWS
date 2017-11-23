@@ -67,31 +67,13 @@
 
                                     <div class="custom-form-group">
                                         <div class="">
-                                            <input type="text" placeholder="Firstname" name="firstname" class="custom-input-text" required/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="text" placeholder="Lastname" name="lastname" class="custom-input-text" required/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="text" placeholder="Username" name="username" class="custom-input-text" required/>
+                                            <input type="text" placeholder="Full Name" name="username" class="custom-input-text" required/>
                                         </div>
                                     </div>
 
                                     <div class="custom-form-group">
                                         <div class="">
                                             <input type="text" placeholder="Email address" name="email" class="custom-input-text" required/>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-form-group">
-                                        <div class="">
-                                            <input type="password" placeholder="Password" name="password" class="custom-input-text" required/>
                                         </div>
                                     </div>
 
@@ -135,9 +117,7 @@
                                             </h3>
                                         </div>
                                         <div class="">
-                                            <textarea placeholder="Write some bio ..." class="custom-input-textarea" name="bio">
-
-                                            </textarea>
+                                            <textarea placeholder="Write some bio ..." class="custom-input-textarea" name="bio"></textarea>
                                         </div>
                                     </div>
 

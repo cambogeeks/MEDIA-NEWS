@@ -8,5 +8,6 @@ return [
     'article' => 'Article',
     'video' => 'Video',
     'audio' => 'Audio',
-    'partner' => 'Partner'
+    'partner' => 'Partner',
+    'meetAuthor' => 'Meet Authors'
 ];

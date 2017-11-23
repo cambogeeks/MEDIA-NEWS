@@ -114,13 +114,13 @@ Route::group([
     // Route::post('users/{user_id}/remove', 'UserController@destroy')->name('admin.users.destroy');
 
     // Author CRUD Operation
-    Route::get('authors', 'AdminController@index')->name('admin.author');
-    Route::get('author/add', 'AdminController@create')->name('admin.author.create');
-    Route::post('author/add', 'AdminController@store')->name('admin.author.store');
-    Route::post('author/manage', 'AdminController@manageAuthor')->name('admin.author.manage');
-    Route::get('author/{author_id}/edit', 'AdminController@edit')->name('admin.author.edit');
-    Route::post('author/{author_id}/edit', 'AdminController@update')->name('admin.author.update');
-    Route::post('author/{author_id}/remove', 'AdminController@destroy')->name('admin.author.destroy');
+    Route::get('authors', 'AuthorController@index')->name('admin.author');
+    Route::get('author/add', 'AuthorController@create')->name('admin.author.create');
+    Route::post('author/add', 'AuthorController@store')->name('admin.author.store');
+//    Route::get('author/manage', 'AuthorController@manageAuthor')->name('admin.author.manage');
+    Route::get('author/edit/{id}', 'AuthorController@edit')->name('admin.author.edit');
+    Route::post('author/edit', 'AuthorController@update')->name('admin.author.update');
+    Route::post('author/{author_id}/remove', 'AuthorController@destroy')->name('admin.author.destroy');
 
     // Setting CRUD Operation
     Route::get('setting', 'SettingController@index')->name('admin.setting');
@@ -132,6 +132,8 @@ Route::group([
 
     // Store images
     Route::post('images', 'ImageController@store');
+
+
 
 });
 
@@ -163,6 +165,9 @@ Route::group([
 
     // Search
     Route::get('/search', 'PageController@search')->name('visitor.search');
+
+    //Author
+    Route::get('/page/author/{id}','PageController@authorDetail')->name('visitor.author.detail');
 });
 
 // Admin AJAX API Route
@@ -178,6 +183,7 @@ Route::group([
     Route::post('posts/{post_id?}', 'AdminAjaxController@getPosts')->name('admin.ajax.posts');
     Route::delete('posts/remove', 'AdminAjaxController@removePost')->name('admin.ajax.delete_post');
     Route::delete('partner/remove', 'AdminAjaxController@removePartner')->name('admin.ajax.delete_partner');
+    Route::delete('author/remove', 'AdminAjaxController@removeAuthor')->name('admin.ajax.delete_author');
     Route::delete('category/remove', 'AdminAjaxController@removeCategory')->name('admin.ajax.delete_category');
     Route::delete('tag/remove', 'AdminAjaxController@removeTag')->name('admin.ajax.remove_tag');
     Route::delete('serie/remove', 'AdminAjaxController@removeSerie')->name('admin.ajax.remove_serie');

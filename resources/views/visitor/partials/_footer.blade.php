@@ -7,7 +7,7 @@
             <div class="footer-gird__item">
                 <div class="inner">
                     <div class="footer-logo">
-                        <img src="{{ asset('images/logo/site_logo_large.png') }}" alt="">
+                        <img src="{{ asset('images/logo/site_logo_medium.png') }}" alt="">
                     </div>
                     <div class="footer-copyright">
                         <p class="font-kh-hanuman">
