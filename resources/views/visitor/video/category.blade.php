@@ -39,6 +39,7 @@
                 </div>
 
                 <div class="section-bg__white uk-grid uk-grid-collapse uk-grid-width-1-1 uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4 uk-grid-width-xlarge-1-4 padding-small">
+                @if(count($videos))
                 @foreach($videos as $video)
                     @includeIf('visitor.components.video.video_grid_index', ['video' => $video])
                 @endforeach
@@ -47,7 +48,9 @@
                 <!-- Pagination -->
                 {{ $videos->links('visitor.components.pagination') }}
                 <!-- /Pagination -->
-
+                @else
+                    <h3>No Data</h3>
+                @endif
             </div>
         </div>
         <!-- /post by category -->

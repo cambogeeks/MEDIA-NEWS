@@ -38,6 +38,7 @@
                 </div>
 
                 <div class="section-bg__white uk-grid uk-grid-collapse uk-grid-width-1-1 uk-grid-width-small-1-2 padding-small uk-grid-width-medium-1-3 uk-grid-width-large-1-4 uk-grid-width-xlarge-1-4">
+                @if(count($articles))
                 @foreach($articles as $article)
                     @includeIf('visitor.components.article.grid_box_2', ['article' => $article])
                 @endforeach
@@ -46,7 +47,9 @@
                 <!-- Pagination -->
                 {{ $articles->links('visitor.components.pagination') }}
                 <!-- /Pagination -->
-
+                @else
+                    <h3>No Data</h3>
+                @endif
             </div>
         </div>
         <!-- /post by category -->
